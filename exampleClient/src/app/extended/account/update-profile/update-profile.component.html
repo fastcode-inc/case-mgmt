@@ -1,0 +1,51 @@
+<section class="spinner-container" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</section>
+<div *ngIf="user" class="list-container">
+  <div class="mate-container">
+    <div class="card-container">
+      <div class="top-breadcrumb center-container">
+        <h1 class="template-title">{{ title }}</h1>
+      </div>
+      <mat-card class="center-container">
+        <mat-card-content>
+          <form [formGroup]="userForm" #itemNgForm="ngForm" (ngSubmit)="onSubmit()" class="item-form">
+            <mat-form-field>
+              <input formControlName="displayName" matInput placeholder="Enter displayName" />
+            </mat-form-field>
+
+            <mat-form-field>
+              <input formControlName="email" matInput placeholder="Enter email" />
+              <mat-error *ngIf="!userForm.get('email').valid && userForm.get('email').touched">{{
+                'GENERAL.ERRORS.REQUIRED' | translate
+              }}</mat-error>
+            </mat-form-field>
+          </form>
+          <br />
+          <br />
+          <div class="association-div full-width">
+            <div class="fc-row">
+              <div class="fc-col-sm-6"></div>
+              <div class="fc-col-sm-6 fc-text-right">
+                <button name="back" mat-raised-button color="basic" (click)="onBack()">
+                  {{ 'GENERAL.ACTIONS.CANCEL' | translate }}
+                </button>
+                <button
+                  name="save"
+                  mat-raised-button
+                  color="primary"
+                  [disabled]="!userForm.valid || loading"
+                  (click)="itemNgForm.ngSubmit.emit()"
+                >
+                  {{ 'GENERAL.ACTIONS.SAVE' | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+          <br />
+          <br />
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
