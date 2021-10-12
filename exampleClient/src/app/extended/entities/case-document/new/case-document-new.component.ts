@@ -11,6 +11,7 @@ import { CasesExtendedService } from 'src/app/extended/entities/cases/cases.serv
 import { GlobalPermissionService } from 'src/app/core/services/global-permission.service';
 
 import { CaseDocumentNewComponent } from 'src/app/entities/case-document/index';
+import { FileService } from 'src/app/entities/case-document/file.service';
 
 @Component({
   selector: 'app-case-document-new',
@@ -30,6 +31,7 @@ export class CaseDocumentNewExtendedComponent extends CaseDocumentNewComponent i
     public caseDocumentExtendedService: CaseDocumentExtendedService,
     public errorService: ErrorService,
     public casesExtendedService: CasesExtendedService,
+    public fileService: FileService,
     public globalPermissionService: GlobalPermissionService
   ) {
     super(
@@ -43,6 +45,7 @@ export class CaseDocumentNewExtendedComponent extends CaseDocumentNewComponent i
       caseDocumentExtendedService,
       errorService,
       casesExtendedService,
+      fileService,
       globalPermissionService
     );
   }

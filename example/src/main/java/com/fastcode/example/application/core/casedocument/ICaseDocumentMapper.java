@@ -20,7 +20,9 @@ public interface ICaseDocumentMapper {
     @Mappings({ @Mapping(source = "entity.cases.caseId", target = "casesDescriptiveField") })
     UpdateCaseDocumentOutput caseDocumentToUpdateCaseDocumentOutput(CaseDocument entity);
 
-    @Mappings({ @Mapping(source = "entity.cases.caseId", target = "casesDescriptiveField") })
+    @Mappings({ 
+    	@Mapping(source = "entity.cases.caseId", target = "casesDescriptiveField"),
+    	@Mapping(source = "entity.file.name", target = "fileDescriptiveField") })
     FindCaseDocumentByIdOutput caseDocumentToFindCaseDocumentByIdOutput(CaseDocument entity);
 
     @Mappings(

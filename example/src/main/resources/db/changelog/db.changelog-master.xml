@@ -12,4 +12,5 @@
          <include file="db/changelog/db.reportingTables.xml" relativeToChangelogFile="false"/>
          <include file="db/changelog/db.documentApi.xml" relativeToChangelogFile="false"/>
   		 <include file="db/changelog/db.data.xml" relativeToChangelogFile="false"/>
+  		 <include file="db/changelog/db.addFileForeignConstraintToCaseDocument.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

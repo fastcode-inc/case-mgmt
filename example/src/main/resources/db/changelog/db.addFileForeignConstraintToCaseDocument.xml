@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet author="fastCode, Inc"
+		id="addCreatedAtColumnToUser">
+		<preConditions onFail="MARK_RAN">
+				<columnExists columnName="file_id" tableName="case_document"
+					schemaName="public" />
+		</preConditions>
+		
+		<addForeignKeyConstraint baseTableName="case_document"
+			baseColumnNames="file_id" constraintName="fk_fileid"
+			referencedTableName="file" referencedColumnNames="id" />
+	</changeSet>
+
+</databaseChangeLog>

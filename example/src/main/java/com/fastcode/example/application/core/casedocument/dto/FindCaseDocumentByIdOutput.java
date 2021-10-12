@@ -11,5 +11,6 @@ public class FindCaseDocumentByIdOutput {
     private Long caseId;
     private Long fileId;
     private Long casesDescriptiveField;
+    private String fileDescriptiveField;
     private Long versiono;
 }

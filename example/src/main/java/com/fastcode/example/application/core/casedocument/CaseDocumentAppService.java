@@ -1,5 +1,7 @@
 package com.fastcode.example.application.core.casedocument;
 
+import com.fastcode.example.addons.docmgmt.domain.file.FileEntity;
+import com.fastcode.example.addons.docmgmt.domain.file.IFileRepository;
 import com.fastcode.example.application.core.casedocument.dto.*;
 import com.fastcode.example.commons.logging.LoggingHelper;
 import com.fastcode.example.commons.search.*;
@@ -33,6 +35,10 @@ public class CaseDocumentAppService implements ICaseDocumentAppService {
     @Qualifier("casesRepository")
     @NonNull
     protected final ICasesRepository _casesRepository;
+    
+    @Qualifier("fileRepository")
+    @NonNull
+    protected final IFileRepository _fileRepository;
 
     @Qualifier("ICaseDocumentMapperImpl")
     @NonNull
@@ -51,6 +57,15 @@ public class CaseDocumentAppService implements ICaseDocumentAppService {
             if (foundCases != null) {
                 foundCases.addCaseDocuments(caseDocument);
                 //caseDocument.setCases(foundCases);
+            }
+        }
+
+        FileEntity foundFile = null;
+        if (input.getCaseId() != null) {
+        	foundFile = _fileRepository.findById(input.getFileId()).orElse(null);
+
+            if (foundFile != null) {
+                caseDocument.setFile(foundFile);
             }
         }
 

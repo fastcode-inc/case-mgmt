@@ -11,6 +11,7 @@ import { Globals } from 'src/app/core/services/globals';
 import { GlobalPermissionService } from 'src/app/core/services/global-permission.service';
 
 import { CasesService } from 'src/app/entities/cases/cases.service';
+import { FileService } from '../file.service';
 
 @Component({
   selector: 'app-case-document-list',
@@ -29,6 +30,7 @@ export class CaseDocumentListComponent extends BaseListComponent<ICaseDocument> 
     public caseDocumentService: CaseDocumentService,
     public errorService: ErrorService,
     public casesService: CasesService,
+    public fileService: FileService,
     public globalPermissionService: GlobalPermissionService
   ) {
     super(router, route, dialog, global, changeDetectorRefs, pickerDialogService, caseDocumentService, errorService);
@@ -63,23 +65,42 @@ export class CaseDocumentListComponent extends BaseListComponent<ICaseDocument> 
         listColumn: 'cases',
         label: 'cases',
       },
+      {
+        column: [
+          {
+            key: 'fileId',
+            value: undefined,
+            referencedkey: 'id',
+          },
+        ],
+        isParent: false,
+        descriptiveField: 'fileDescriptiveField',
+        referencedDescriptiveField: 'name',
+        service: this.fileService,
+        associatedObj: undefined,
+        table: 'file',
+        type: 'ManyToOne',
+        url: 'caseDocuments',
+        listColumn: 'file',
+        label: 'file',
+      },
     ];
   }
 
   setColumns() {
     this.columns = [
       {
-        column: 'fileId',
-        searchColumn: 'fileId',
-        label: 'file Id',
-        sort: true,
-        filter: true,
-        type: ListColumnType.Number,
-      },
-      {
         column: 'casesDescriptiveField',
         searchColumn: 'cases',
         label: 'cases',
+        sort: true,
+        filter: true,
+        type: ListColumnType.String,
+      },
+      {
+        column: 'fileDescriptiveField',
+        searchColumn: 'file',
+        label: 'file',
         sort: true,
         filter: true,
         type: ListColumnType.String,

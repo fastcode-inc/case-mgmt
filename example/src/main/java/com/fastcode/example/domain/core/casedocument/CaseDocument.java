@@ -1,5 +1,6 @@
 package com.fastcode.example.domain.core.casedocument;
 
+import com.fastcode.example.addons.docmgmt.domain.file.FileEntity;
 import com.fastcode.example.domain.core.abstractentity.AbstractEntity;
 import com.fastcode.example.domain.core.cases.Cases;
 import com.querydsl.core.annotations.Config;
@@ -35,4 +36,8 @@ public class CaseDocument extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "case_id", insertable = false, updatable = false)
     private Cases cases;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "file_id", insertable = false, updatable = false)
+    private FileEntity file;
 }
