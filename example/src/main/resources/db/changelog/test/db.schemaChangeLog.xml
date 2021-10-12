@@ -1,0 +1,113 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-1">
+        <createTable tableName="cases">
+            <column name="case_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="Case_pkey"/>
+            </column>
+            <column name="type" type="VARCHAR"/>
+            <column name="status" type="VARCHAR"/>
+            <column name="summary" type="VARCHAR"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-2">
+        <createTable tableName="case_document">
+            <column name="case_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="casedocument_pkey"/>
+            </column>
+            <column name="file_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="casedocument_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-3">
+        <createTable tableName="case_history">
+            <column name="case_history_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="CaseHistory_pkey"/>
+            </column>
+            <column name="case_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="message" type="VARCHAR"/>
+            <column name="timestamp" type="TIME WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-4">
+        <createTable tableName="person_case">
+            <column name="case_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="Person-Case_pkey"/>
+            </column>
+            <column name="person_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="Person-Case_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-5">
+        <createTable tableName="task">
+            <column name="task_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="Task_pkey"/>
+            </column>
+            <column name="username" type="VARCHAR"/>
+            <column name="type" type="VARCHAR"/>
+            <column name="status" type="VARCHAR"/>
+            <column name="message" type="VARCHAR"/>
+            <column name="case_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-6">
+        <createTable tableName="person">
+            <column name="person_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="Person_pkey"/>
+            </column>
+            <column name="given_name" type="VARCHAR"/>
+            <column name="surname" type="VARCHAR"/>
+            <column name="birth_date" type="date"/>
+            <column name="home_phone" type="VARCHAR"/>
+            <column name="comments" type="VARCHAR"/>
+            <column name="username" type="VARCHAR"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-7">
+        <createTable tableName="users">
+            <column name="username" type="VARCHAR">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="User_pkey"/>
+            </column>
+            <column name="password" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="display_name" type="VARCHAR"/>
+            <column name="email" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_active" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_email_confirmed" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-8">
+        <addForeignKeyConstraint baseColumnNames="case_id" baseTableName="task" constraintName="Fk_caseID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="case_id" referencedTableName="cases" validate="true"/>
+    </changeSet>
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-9">
+        <addUniqueConstraint columnNames="file_id" constraintName="UNQ_fileid" tableName="case_document"/>
+    </changeSet>
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-10">
+        <addForeignKeyConstraint baseColumnNames="person_id" baseTableName="person_case" constraintName="Fl_personID" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="person_id" referencedTableName="person" validate="true"/>
+    </changeSet>
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-11">
+        <addForeignKeyConstraint baseColumnNames="username" baseTableName="person" constraintName="Fk_username" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="username" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-12">
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="jv_commit_pk_seq" startValue="1"/>
+    </changeSet>
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-13">
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="jv_global_id_pk_seq" startValue="1"/>
+    </changeSet>
+    <changeSet author="hknfi (generated)" failOnError="false" id="1634049423354-14">
+        <createSequence cacheSize="1" cycle="false" dataType="bigint" incrementBy="1" maxValue="9223372036854775807" minValue="1" sequenceName="jv_snapshot_pk_seq" startValue="1"/>
+    </changeSet>
+</databaseChangeLog>
