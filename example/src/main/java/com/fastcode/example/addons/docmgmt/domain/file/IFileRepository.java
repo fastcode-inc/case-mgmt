@@ -18,37 +18,37 @@ public interface IFileRepository
         JpaRepository<FileEntity, Long>,
         QuerydslPredicateExecutor<FileEntity>,
         LockingAndVersioningRepository<FileEntity, String> {
-    @Modifying
-    @Transactional
-    @Query(
-        "update  FileEntity u set u.deleted = true  where u.id not in (:ids) and u.emailTemplateId = :emailTemplateId "
-    )
-    void setDeleteAdditionalFileEmailTemplate(
-        @Param("ids") List<Long> allHistoryFiles,
-        @Param("emailTemplateId") Long emailTemplateId
-    );
-
-    @Modifying
-    @Transactional
-    @Query("update  FileEntity u set u.deleted = true  where  u.emailTemplateId = :emailTemplateId ")
-    void deletePreviousTemplate(@Param("emailTemplateId") Long emailTemplateId);
-
-    @Modifying
-    @Transactional
-    @Query("update FileEntity u set u.emailTemplateId = :emailTemplateId , u.deleted = false where u.id = :id")
-    void updateFileEmailTemplate(@Param("id") Long id, @Param("emailTemplateId") Long emailTemplateId);
-
-    @Modifying
-    @Transactional
-    @Query("update FileEntity u set u.emailVariableId = :emailVariableId where u.id = :id")
-    void updateFileVariableTemplate(@Param("id") Long id, @Param("emailVariableId") Long emailVariableId);
-
-    @Modifying
-    @Transactional
-    @Query("update FileEntity u set u.emailVariableId = :emailVariableId where u.id in( :ids ) ")
-    void updateFileVariableTemplateList(@Param("ids") List<Long> ids, @Param("emailVariableId") Long emailVariableId);
-
-    List<FileEntity> getFileByEmailTemplateIdAndDeletedFalse(Long emailTemplateId);
-
-    List<FileEntity> getFileByEmailVariableIdAndDeletedFalse(Long emailTemplateId);
+//    @Modifying
+//    @Transactional
+//    @Query(
+//        "update  FileEntity u set u.deleted = true  where u.id not in (:ids) and u.emailTemplateId = :emailTemplateId "
+//    )
+//    void setDeleteAdditionalFileEmailTemplate(
+//        @Param("ids") List<Long> allHistoryFiles,
+//        @Param("emailTemplateId") Long emailTemplateId
+//    );
+//
+//    @Modifying
+//    @Transactional
+//    @Query("update  FileEntity u set u.deleted = true  where  u.emailTemplateId = :emailTemplateId ")
+//    void deletePreviousTemplate(@Param("emailTemplateId") Long emailTemplateId);
+//
+//    @Modifying
+//    @Transactional
+//    @Query("update FileEntity u set u.emailTemplateId = :emailTemplateId , u.deleted = false where u.id = :id")
+//    void updateFileEmailTemplate(@Param("id") Long id, @Param("emailTemplateId") Long emailTemplateId);
+//
+//    @Modifying
+//    @Transactional
+//    @Query("update FileEntity u set u.emailVariableId = :emailVariableId where u.id = :id")
+//    void updateFileVariableTemplate(@Param("id") Long id, @Param("emailVariableId") Long emailVariableId);
+//
+//    @Modifying
+//    @Transactional
+//    @Query("update FileEntity u set u.emailVariableId = :emailVariableId where u.id in( :ids ) ")
+//    void updateFileVariableTemplateList(@Param("ids") List<Long> ids, @Param("emailVariableId") Long emailVariableId);
+//
+//    List<FileEntity> getFileByEmailTemplateIdAndDeletedFalse(Long emailTemplateId);
+//
+//    List<FileEntity> getFileByEmailVariableIdAndDeletedFalse(Long emailTemplateId);
 }
